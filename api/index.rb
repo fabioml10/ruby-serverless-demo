@@ -1,16 +1,14 @@
 require 'json'
-require 'uri'
 
-Handler = proc do |env|
-  query_string = env['QUERY_STRING'] || ''
-  params = URI.decode_www_form(query_string).to_h
+Handler = proc do |request:, response:|
+  params = request.query || {}
   nome = params['nome'] || 'Vercel'
 
-  body = {
+  response.status = 200
+  response['Content-Type'] = 'application/json'
+  response.body = JSON.dump({
     message: "Olá, #{nome}!",
     conceito: 'Esta função Ruby está rodando na Vercel.',
     conceito_serverless: 'Vercel escala automaticamente as funções serverless.'
-  }.to_json
-
-  [200, {'Content-Type' => 'application/json'}, [body]]
+  })
 end
