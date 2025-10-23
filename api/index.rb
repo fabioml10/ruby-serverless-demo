@@ -1,7 +1,8 @@
 require 'json'
+require 'uri'
 
-def handler(event:, context:)
-  params = event['queryStringParameters'] || {}
+Handler = proc do |env|
+  params = URI.decode_www_form(env['QUERY_STRING']).to_h
   nome = params['nome'] || 'Vercel'
 
   body = {
@@ -10,9 +11,5 @@ def handler(event:, context:)
     conceito_serverless: 'Vercel escala automaticamente as funções serverless.'
   }.to_json
 
-  {
-    statusCode: 200,
-    headers: { 'Content-Type' => 'application/json' },
-    body: body
-  }
+  [200, {'Content-Type' => 'application/json'}, [body]]
 end
