@@ -4,3 +4,5 @@ ruby '~> 3.3'
 
 gem 'puma'
 gem 'rack'
+gem 'webmock'
+gem 'minitest'
