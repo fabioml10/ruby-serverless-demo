@@ -1,6 +1,6 @@
 require 'json'
 
-Handler = proc do |request:, response:|
+Handler = proc do |request, response|
   params = request.query || {}
   nome = params['nome'] || 'Vercel'
 
