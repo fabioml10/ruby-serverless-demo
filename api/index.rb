@@ -1,7 +1,7 @@
 require 'json'
 
-def handler(request)
-  params = request.query || {}
+def handler(event:, context:)
+  params = event['queryStringParameters'] || {}
   nome = params['nome'] || 'Vercel'
 
   body = {

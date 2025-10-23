@@ -2,7 +2,8 @@
   "version": 2,
   "functions": {
     "api/index.rb": {
-      "runtime": "ruby"
+      "runtime": "ruby",
+      "handler": "index.handler"
     }
   },
   "routes": [
