@@ -2,7 +2,8 @@ require 'json'
 require 'uri'
 
 Handler = proc do |env|
-  params = URI.decode_www_form(env['QUERY_STRING']).to_h
+  query_string = env['QUERY_STRING'] || ''
+  params = URI.decode_www_form(query_string).to_h
   nome = params['nome'] || 'Vercel'
 
   body = {
